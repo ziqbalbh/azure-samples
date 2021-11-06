@@ -1,0 +1,36 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p>The time on the server is @DateTime.Now</p>
+</div>
+
+@{
+    var pubIp = new System.Net.WebClient().DownloadString("https://api.ipify.org");
+}
+
+<h3>Debug information</h3>
+<ul>
+    <li><strong>Request Url</strong><span>: @Request.Path</span></li>
+    <li><strong>Outbound public IP</strong><span>: @pubIp</span></li>
+    <li><strong>Inbound client IP</strong><span>: @this.HttpContext.Connection.RemoteIpAddress</span></li>
+</ul>
+<strong>Headers</strong>
+<ul>
+    @foreach (var h in Request.Headers)
+    {
+        <li><strong>@h</strong><span>: @Request.Headers[h.ToString()]</span></li>
+    }
+</ul>
+@* <strong>Features</strong>
+<ul>
+    @foreach (var f in this.HttpContext.Features)
+    {
+        <li><strong>@f</strong><span>: </span></li>
+    }
+</ul> *@
